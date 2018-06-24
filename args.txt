@@ -1,0 +1,1 @@
+python3 CDA.py 300.0e-9 1690.0e-9 1.0e-9 10.0e-5 30.0e-9 30.0e-9 15.0e-9 50.0 15.0 "Au" 1.25 10 10 90.0e-9 Square Z:\\Slim\\Python_scripts\\Coupled_Dipole_Approximation\\Results
