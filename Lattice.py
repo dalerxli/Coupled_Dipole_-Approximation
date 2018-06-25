@@ -155,12 +155,14 @@ class Lattice:
     New=np.asarray(New).reshape(-1,3) 
     
     # Filter repeating values
+    ind=[]
     d=dist.pdist(New)
     d=np.triu(dist.squareform(d))
     for i in range(d.shape[0]):
         for j in d[i]:
-            if j<0.99 and j>0:
-                New[i]=np.empty(3)     
+            if j<a/2 and j>0:
+                ind.append(i)
+    New=np.delete(New,ind,0)         
     
     self.pos=np.asarray(New).reshape(-1,3)
     self.N=self.pos.shape[0]
