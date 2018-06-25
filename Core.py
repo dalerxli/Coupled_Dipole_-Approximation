@@ -63,7 +63,7 @@ def Aij_matrix(arguments):
     k = arguments[1]
     pos_i=arguments[2]
     pos_j =arguments[3]
-
+    
     temp = pos_j - pos_i
     r_ij = np.sqrt(temp[0]**2+temp[1]**2+temp[2]**2)
     # calculate the unit vectors between two particles

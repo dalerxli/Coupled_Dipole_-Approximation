@@ -63,7 +63,7 @@ class Lattice:
             r_eff--> dimensions of each particle type(numpy array (1x3))
         """
     
-    
+        self.type='Honeycomb'
         def latHC(a,N):
             latticeA=[(a,0,0),(-a/2,np.sqrt(3)/2*a,0),(-a/2,-np.sqrt(3)/2*a,0)]
             latticeB=[(-a,0,0),(a/2,-np.sqrt(3)/2*a,0),(a/2,np.sqrt(3)/2*a,0)]
@@ -114,7 +114,7 @@ class Lattice:
     
     
     def Betta_Graphyne(self):
-    """
+        """
         A function to create Betta-Graphyne lattice with the nx,ny unit cells, 
         lattice constant of step and particle dimension of rx,ry and rz.
                     
@@ -123,51 +123,51 @@ class Lattice:
             pos--> position of each particle in the lattice type(numpy array)
             r_eff--> dimensions of each particle type(numpy array (1x3))
         """    
+        self.type='Betta_Graphyne'
+        
+        a=self.step
+        Nx=self.nx
+        Ny=self.ny
+        #Generate a unit cell
+        sin_ang=np.sin(np.radians(60))
+        cos_ang=np.cos(np.radians(60))
+        UC=np.array([[0,0,0],[a,0,0],[2*a,0,0],[3*a,0,0],[-cos_ang*a,sin_ang*a,0],
+                     [0,2*a*sin_ang,0],[cos_ang*a,3*a*sin_ang,0],
+                     [2*cos_ang*a,4*a*sin_ang,0],[(3+cos_ang)*a,sin_ang*a,0],
+                     [3*a,2*sin_ang*a,0],[(3-cos_ang)*a,3*sin_ang*a,0],
+                     [(3-2*cos_ang)*a,4*sin_ang*a,0],[(3-cos_ang)*a,5*sin_ang*a,0],
+                     [3*a,6*sin_ang*a,0],[(3+cos_ang)*a,7*sin_ang*a,0],
+                     [(1-cos_ang)*a,5*sin_ang*a,0],[(1-2*cos_ang)*a,6*sin_ang*a,0],
+                     [(1-3*cos_ang)*a,7*sin_ang*a,0],
+                     [0,a*8*sin_ang,0],[1*a,a*8*sin_ang,0],[2*a,a*8*sin_ang,0],[3*a,a*8*sin_ang,0]]).reshape(22,3)
+    
+        # Define lattice vectors    
+        a1=np.asarray([7*a,0,0])
+        a2=np.asarray([7*a*cos_ang,7*a*sin_ang,0])
+        
+        # Generate Lattice
+        New=[]
+        for i in range(0,Nx):
+            for j in range(0,Ny):
+                New.append(np.add(UC,(a1*i+a2*j)))
         
         
-    a=self.step
-    Nx=self.nx
-    Ny=self.ny
-    #Generate a unit cell
-    sin_ang=np.sin(np.radians(60))
-    cos_ang=np.cos(np.radians(60))
-    UC=np.array([[0,0,0],[a,0,0],[2*a,0,0],[3*a,0,0],[-cos_ang*a,sin_ang*a,0],
-                 [0,2*a*sin_ang,0],[cos_ang*a,3*a*sin_ang,0],
-                 [2*cos_ang*a,4*a*sin_ang,0],[(3+cos_ang)*a,sin_ang*a,0],
-                 [3*a,2*sin_ang*a,0],[(3-cos_ang)*a,3*sin_ang*a,0],
-                 [(3-2*cos_ang)*a,4*sin_ang*a,0],[(3-cos_ang)*a,5*sin_ang*a,0],
-                 [3*a,6*sin_ang*a,0],[(3+cos_ang)*a,7*sin_ang*a,0],
-                 [(1-cos_ang)*a,5*sin_ang*a,0],[(1-2*cos_ang)*a,6*sin_ang*a,0],
-                 [(1-3*cos_ang)*a,7*sin_ang*a,0],
-                 [0,a*8*sin_ang,0],[1*a,a*8*sin_ang,0],[2*a,a*8*sin_ang,0],[3*a,a*8*sin_ang,0]]).reshape(22,3)
-
-    # Define lattice vectors    
-    a1=np.asarray([7*a,0,0])
-    a2=np.asarray([7*a*cos_ang,7*a*sin_ang,0])
-    
-    # Generate Lattice
-    New=[]
-    for i in range(0,Nx):
-        for j in range(0,Ny):
-            New.append(np.add(UC,(a1*i+a2*j)))
-    
-    
-    New=np.asarray(New).reshape(-1,3) 
-    
-    # Filter repeating values
-    ind=[]
-    d=dist.pdist(New)
-    d=np.triu(dist.squareform(d))
-    for i in range(d.shape[0]):
-        for j in d[i]:
-            if j<a/2 and j>0:
-                ind.append(i)
-    New=np.delete(New,ind,0)         
-    
-    self.pos=np.asarray(New).reshape(-1,3)
-    self.N=self.pos.shape[0]
-    self.r_eff=np.asarray([self.rx,self.ry,self.rz]*self.N).reshape(-1,3)
-    return self.N, self.pos, self.r_eff
+        New=np.asarray(New).reshape(-1,3) 
+        New=np.unique(New, axis=0)
+        # Filter repeating values
+        ind=[]
+        d=dist.pdist(New)
+        d=np.triu(dist.squareform(d))
+        for i in range(d.shape[0]):
+            for j in d[i]:
+                if j<a/7 and j>0:
+                    ind.append(i)
+        New=np.delete(New,ind,0)         
+        
+        self.pos=np.asarray(New).reshape(-1,3)
+        self.N=self.pos.shape[0]
+        self.r_eff=np.asarray([self.rx,self.ry,self.rz]*self.N).reshape(-1,3)
+        return self.N, self.pos, self.r_eff
     
     
 
@@ -181,7 +181,7 @@ class Lattice:
             pos--> position of each particle in the lattice type(numpy array)
             r_eff--> dimensions of each particle type(numpy array (1x3))
         """
-    
+        self.type='Hexagonal'
         def latHex(a,N):
             a=a/m.sqrt(3)
             latticeA=[(a,0,0),(-a/2,m.sqrt(3)/2*a,0),(-a/2,-m.sqrt(3)/2*a,0)]
