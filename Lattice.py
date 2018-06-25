@@ -113,6 +113,17 @@ class Lattice:
     
     
     def Betta_Graphyne(self):
+    """
+        A function to create Betta-Graphyne lattice with the nx,ny unit cells, 
+        lattice constant of step and particle dimension of rx,ry and rz.
+                    
+        Return:
+            N--> total number of particles type(integer)
+            pos--> position of each particle in the lattice type(numpy array)
+            r_eff--> dimensions of each particle type(numpy array (1x3))
+        """    
+        
+        
     a=self.step
     Nx=self.nx
     Ny=self.ny
@@ -150,7 +161,10 @@ class Lattice:
             if j<0.99 and j>0:
                 New[i]=np.empty(3)     
     
-    return np.asarray(New).reshape(-1,3)
+    self.pos=np.asarray(New).reshape(-1,3)
+    self.N=self.pos.shape[0]
+    self.r_eff=np.asarray([self.rx,self.ry,self.rz]*self.N).reshape(-1,3)
+    return self.N, self.pos, self.r_eff
     
     
 
