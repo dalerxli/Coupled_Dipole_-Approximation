@@ -112,6 +112,46 @@ class Lattice:
     
     
     
+    def Betta_Graphyne(self):
+    a=self.step
+    Nx=self.nx
+    Ny=self.ny
+    #Generate a unit cell
+    sin_ang=np.sin(np.radians(60))
+    cos_ang=np.cos(np.radians(60))
+    UC=np.array([[0,0,0],[a,0,0],[2*a,0,0],[3*a,0,0],[-cos_ang*a,sin_ang*a,0],
+                 [0,2*a*sin_ang,0],[cos_ang*a,3*a*sin_ang,0],
+                 [2*cos_ang*a,4*a*sin_ang,0],[(3+cos_ang)*a,sin_ang*a,0],
+                 [3*a,2*sin_ang*a,0],[(3-cos_ang)*a,3*sin_ang*a,0],
+                 [(3-2*cos_ang)*a,4*sin_ang*a,0],[(3-cos_ang)*a,5*sin_ang*a,0],
+                 [3*a,6*sin_ang*a,0],[(3+cos_ang)*a,7*sin_ang*a,0],
+                 [(1-cos_ang)*a,5*sin_ang*a,0],[(1-2*cos_ang)*a,6*sin_ang*a,0],
+                 [(1-3*cos_ang)*a,7*sin_ang*a,0],
+                 [0,a*8*sin_ang,0],[1*a,a*8*sin_ang,0],[2*a,a*8*sin_ang,0],[3*a,a*8*sin_ang,0]]).reshape(22,3)
+
+    # Define lattice vectors    
+    a1=np.asarray([7*a,0,0])
+    a2=np.asarray([7*a*cos_ang,7*a*sin_ang,0])
+    
+    # Generate Lattice
+    New=[]
+    for i in range(0,Nx):
+        for j in range(0,Ny):
+            New.append(np.add(UC,(a1*i+a2*j)))
+    
+    
+    New=np.asarray(New).reshape(-1,3) 
+    
+    # Filter repeating values
+    d=dist.pdist(New)
+    d=np.triu(dist.squareform(d))
+    for i in range(d.shape[0]):
+        for j in d[i]:
+            if j<0.99 and j>0:
+                New[i]=np.empty(3)     
+    
+    return np.asarray(New).reshape(-1,3)
+    
     
 
     def Hexagonal(self):
