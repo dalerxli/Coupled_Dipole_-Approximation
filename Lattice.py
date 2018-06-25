@@ -2,6 +2,7 @@ import numpy as np
 import math as m
 from numpy.random import  uniform
 import matplotlib.pyplot as plt
+import scipy.spatial.distance as dist
 
 class Lattice:
     
