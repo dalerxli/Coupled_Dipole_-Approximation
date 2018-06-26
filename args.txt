@@ -1,1 +1,16 @@
-python3 CDA.py 300.0e-9 1690.0e-9 1.0e-9 10.0e-5 30.0e-9 30.0e-9 15.0e-9 50.0 15.0 "Au" 1.25 10 10 90.0e-9 Square Z:\\Slim\\Python_scripts\\Coupled_Dipole_Approximation\\Results
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 0 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 5 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 10 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 15 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 20 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 25 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 30 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 35 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 40 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 45 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 50 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 55 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 60 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 65 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 70 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 
+python3 CDA.py 3e-07 1.1e-06 3e-09 0.0001 3e-08 3e-08 1.2e-08 75 0 Au 1.25 5 5 8.999999999999999e-08 Betta_Graphyne home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results 

@@ -26,7 +26,7 @@ def DO(lc,AOI,n,N_m):
     
 
 
-period=[180,240]
+period=[180]
 
 plt.rcParams['axes.facecolor'] = 'black'
 plt.rcParams['font.size']=10
@@ -35,10 +35,11 @@ for per in period:
     Q=[]
     k=[]
     energy=[]
-    AOI=[x for x in range(0,65,5)]
-    os.chdir('C:\\Users\\Ievgen Voloshenko\\Desktop\\CDA_PYTHON-master\\Parameters search\\HC\\{}'.format(str(per)+'nm'))
+    AOI=[65,30,15,70,25,35,10,5,40,55,45,60,50,0,75,20]
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Betta_Graphyne')
     files=os.listdir()
     for file in files:
+        print(file)
         f=h5py.File(file,'r+')
         wave.append(list(f['wave']))
         Q.append(list(f['q_ext']))
@@ -52,7 +53,7 @@ for per in period:
     kdo=[DO(360e-9,aoi,1,1.52) for aoi in AOI]
     #plt.plot(kdo,[x*2*m.pi/1240 for x in kdo],'w--')
     fig=plt.figure()
-    cp = plt.contourf(k, energy, Q,500,vmin=0,vmax=8,cmap='jet')
+    cp = plt.contourf(k, energy, Q,500,cmap='jet')
     #plt.plot(kdo,[1240/(2*m.pi/x*1e9) for x in kdo],'w--')
 
 
@@ -63,9 +64,10 @@ for per in period:
     cNorm = mpl.colors.Normalize(vmin=0, vmax=8)
     cb1 = mpl.colorbar.ColorbarBase(cax, norm=cNorm,cmap='jet')
     axes = plt.gca()
-    os.chdir('C:\\Users\\Ievgen Voloshenko\\Desktop\\CDA_PYTHON-master\\Parameters search\\HC\\results')
-    plt.savefig('{}nm.png'.format(str(per)),dpi=600)
-    plt.close()
+    plt.show()
+    #os.chdir('C:\\Users\\Ievgen Voloshenko\\Desktop\\CDA_PYTHON-master\\Parameters search\\HC\\results')
+    #plt.savefig('{}nm.png'.format(str(per)),dpi=600)
+    #plt.close()
 
    
     

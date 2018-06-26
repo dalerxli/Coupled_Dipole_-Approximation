@@ -63,7 +63,7 @@ class Lattice:
             r_eff--> dimensions of each particle type(numpy array (1x3))
         """
     
-    
+        self.type='Honeycomb'
         def latHC(a,N):
             latticeA=[(a,0,0),(-a/2,np.sqrt(3)/2*a,0),(-a/2,-np.sqrt(3)/2*a,0)]
             latticeB=[(-a,0,0),(a/2,-np.sqrt(3)/2*a,0),(a/2,np.sqrt(3)/2*a,0)]
@@ -123,8 +123,8 @@ class Lattice:
             pos--> position of each particle in the lattice type(numpy array)
             r_eff--> dimensions of each particle type(numpy array (1x3))
         """    
-        
-        
+        self.type='Betta_Graphyne'
+
         a=self.step
         Nx=self.nx
         Ny=self.ny
@@ -154,6 +154,22 @@ class Lattice:
     
         New=np.asarray(New).reshape(-1,3) 
         
+
+    
+        # Define lattice vectors    
+        a1=np.asarray([7*a,0,0])
+        a2=np.asarray([7*a*cos_ang,7*a*sin_ang,0])
+        
+        # Generate Lattice
+        New=[]
+        for i in range(0,Nx):
+            for j in range(0,Ny):
+                New.append(np.add(UC,(a1*i+a2*j)))
+        
+        
+        New=np.asarray(New).reshape(-1,3) 
+        New=np.unique(New, axis=0)
+
         # Filter repeating values
         ind=[]
         d=dist.pdist(New)
@@ -162,11 +178,14 @@ class Lattice:
             for j in d[i]:
                 if j<a/7 and j>0:
                     ind.append(i)
+
         
         New=np.delete(New,ind,0)
     
         self.pos=np.asarray(New).reshape(-1,3)
         print(self.pos.shape[0])
+        New=np.delete(New,ind,0)         
+        self.pos=np.asarray(New).reshape(-1,3)
         self.N=self.pos.shape[0]
         self.r_eff=np.asarray([self.rx,self.ry,self.rz]*self.N).reshape(-1,3)
         return self.N, self.pos, self.r_eff
@@ -183,7 +202,7 @@ class Lattice:
             pos--> position of each particle in the lattice type(numpy array)
             r_eff--> dimensions of each particle type(numpy array (1x3))
         """
-    
+        self.type='Hexagonal'
         def latHex(a,N):
             a=a/m.sqrt(3)
             latticeA=[(a,0,0),(-a/2,m.sqrt(3)/2*a,0),(-a/2,-m.sqrt(3)/2*a,0)]

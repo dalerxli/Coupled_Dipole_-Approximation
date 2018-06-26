@@ -160,7 +160,7 @@ if __name__=='__main__':
     import os
     #d =  os.chdir('{}'.format(args.save_dir))
     
-    f = h5py.File("{} {} {}".format(args.Lat,args.AOI,args.Azi), "w")
+    f = h5py.File("{} AOI-{} Azi-{} {}x{} R={}nm".format(args.Lat,args.AOI,args.Azi,args.nx,args.ny,round(args.a*1e9)), "w")
     f.create_dataset('wave', data=wave)
     f.create_dataset('c_abs', data=c_abs)
     f.create_dataset('c_ext', data=c_ext)
@@ -171,7 +171,8 @@ if __name__=='__main__':
     f.create_dataset('p_calc', data = p_calc)
     f.create_dataset('pos', data = pos)
     f.create_dataset('r_eff', data = r_eff)
-    
+    f.create_dataset('AOI',data=args.AOI)
+    f.create_dataset('AZI', data= args.Azi)
     f.close()
     
        
