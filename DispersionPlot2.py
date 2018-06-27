@@ -36,7 +36,7 @@ for per in period:
     k=[]
     energy=[]
     AOI=[65,30,15,70,25,35,10,5,40,55,45,60,50,0,75,20]
-    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Betta_Graphyne')
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Betta_Graphyne_new/0')
     files=os.listdir()
     for file in files:
         print(file)
@@ -61,7 +61,7 @@ for per in period:
     plt.ylabel('Energy (eV)',size=15)
     plt.suptitle('Extinction efficiency dispersion, period={}'.format(str(per)+'nm'), fontsize=15)
     cax = fig.add_axes([0.91, 0.15, 0.03, 0.7])
-    cNorm = mpl.colors.Normalize(vmin=0, vmax=8)
+    cNorm = mpl.colors.Normalize()
     cb1 = mpl.colorbar.ColorbarBase(cax, norm=cNorm,cmap='jet')
     axes = plt.gca()
     plt.show()
