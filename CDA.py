@@ -143,9 +143,8 @@ if __name__=='__main__':
         print("Elapsed Time @ this wavelenth %3.2f sec" % (end_at_this_wavelength - start_at_this_wavelength))
         
         def efficiency_calc(cross_section, r_eff,AOI,phi):
-            r=args.a*args.b*args.c/np.sqrt(args.a**2*(np.sin(AOI))**2*(np.cos(phi))**2+(args.b)**2*(np.sin(AOI))**2
-                                           *(np.sin(phi))**2+(args.c)**2*(np.cos(phi))**2)
-            return cross_section /(np.pi * r**2)
+            r=args.a*np.cos(AOI)+args.c*np.sin(AOI)
+            return cross_section /(np.pi * r*args.b)
 
     q_ext = efficiency_calc(c_ext, r_eff,AOI,phi)
     q_abs = efficiency_calc(c_abs, r_eff,AOI,phi)
