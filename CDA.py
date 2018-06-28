@@ -38,6 +38,7 @@ if __name__=='__main__':
     parse.add_argument('lc',help='Lattice constant (distance between nearest neighbours)',type=float)
     parse.add_argument('Lat',help='type of the lattice')
     parse.add_argument('save_dir',help='Directory to save data')
+    parse.add_argument('pol', help='Initial polarization state')
     
     args = parse.parse_args() #all arguments are now stored here
     print(args)
@@ -56,7 +57,10 @@ if __name__=='__main__':
     AOI=np.radians(args.AOI)
     phi=np.radians(args.Azi)
     # incident polarization of the light, [1,0,0] means light is polarized in x, [0,1,0] mean light is polarized in y    
-    E0_vec = np.array([np.sin(AOI-np.radians(90))*np.cos(phi), np.sin(AOI-np.radians(90))*np.sin(phi), np.cos(AOI-np.radians(90))], dtype=complex)
+    if args.pol=='p':
+        E0_vec = np.array([1,0,0], dtype=complex)
+    elif args.pol=='s':
+        E0_vec = np.array([0,1,0], dtype=complex)
     # inciddent k vector [0,0,1] means light is travelling in +z axis
     k_vec = np.array([np.sin(AOI)*np.cos(phi), np.sin(AOI)*np.sin(phi), np.cos(AOI)]) 
     # Dielectric function of surrounding medium
