@@ -13,7 +13,7 @@ with open('args.txt','w') as f:
             wvl_min=300e-9
             wvl_max=1100e-9
             wvl_step=3e-9
-            tol=10e-5
+            tol=10e-6
             rx=80e-9        
             ry=rx
             rz=0.8*rx
@@ -21,11 +21,11 @@ with open('args.txt','w') as f:
             Phi=phi
             mat='Au'
             Nm=1.25
-            nx=5
-            ny=5
+            nx=15
+            ny=15
             space=rx*3
             Lat='Betta_Graphyne'
-            sd='home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_sp90/S'
+            sd='home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results'
             pol='s' 
  
             f.write('python3 CDA.py {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}\n'.format(wvl_min,wvl_max,wvl_step,tol,rx,ry,rz,aoi,phi,mat,Nm,nx,ny,space,Lat,sd,pol))

@@ -36,14 +36,14 @@ for per in period:
     k=[]
     energy=[]
     #AOI=[50,5,40,60,25,35,10,65,15,70,0,75,20,55,45,30]
-    AOI=[70,0,35,65,40,75,55,50,60,30,20,15,25,10,5,45]
-    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_sp90/S')
+    AOI=[15,5,60,50,40,10,30,45,70,75,35,0,65,25,55,20]
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_15x15/S')
     files=os.listdir()
     for file in files:
         print(file)
         f=h5py.File(file,'r+')
         wave.append(list(f['wave']))
-        Q.append(list(f['q_ext']))
+        Q.append(list(f['c_ext']))
    
         f.close()
     
@@ -54,7 +54,7 @@ for per in period:
     kdo=[DO(360e-9,aoi,1,1.52) for aoi in AOI]
     #plt.plot(kdo,[x*2*m.pi/1240 for x in kdo],'w--')
     fig=plt.figure()
-    cp = plt.contourf(k, energy, Q,500,vmin=0,vmax=5,cmap='jet')
+    cp = plt.contourf(k, energy, Q,500,cmap='rainbow')
     #plt.plot(kdo,[1240/(2*m.pi/x*1e9) for x in kdo],'w--')
 
 
@@ -62,8 +62,8 @@ for per in period:
     plt.ylabel('Energy (eV)',size=15)
     plt.suptitle('Extinction efficiency dispersion, period={}'.format(str(per)+'nm'), fontsize=15)
     cax = fig.add_axes([0.91, 0.15, 0.03, 0.7])
-    cNorm = mpl.colors.Normalize(vmin=0,vmax=5)
-    cb1 = mpl.colorbar.ColorbarBase(cax, norm=cNorm,cmap='jet')
+    cNorm = mpl.colors.Normalize()
+    cb1 = mpl.colorbar.ColorbarBase(cax, norm=cNorm,cmap='rainbow')
     axes = plt.gca()
     plt.show()
     #os.chdir('C:\\Users\\Ievgen Voloshenko\\Desktop\\CDA_PYTHON-master\\Parameters search\\HC\\results')

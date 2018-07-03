@@ -13,7 +13,7 @@ import numpy as np
 
 Data=[]
 R=[95,85,70,35,65,40,90,30,100,60,80,75,50,55,45]
-d=os.chdir('Results/Betta_Graphyne')
+d=os.chdir('Results/BG_15x15/S')
 files=os.listdir(d)
 for file in files:
     print(file)
@@ -24,10 +24,10 @@ for file in files:
     
     wave=[i*1e9 for i in list(wave)]
     
-    #plt.plot(wave,Q,label='c_ext')
-    # plt.plot(wave,Q_sca,label='c_scat')
-    #plt.xlabel('Wavelength (nm)')
-    #plt.xlim([min(wave),max(wave)])
+    #plt.plot(wave,Q,label='')
+    plt.plot(wave,Q_sca,label='c_scat')
+    plt.xlabel('Wavelength (nm)')
+    plt.xlim([min(wave),max(wave)])
     
     Data.append(Q)
     
