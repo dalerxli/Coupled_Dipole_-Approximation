@@ -256,6 +256,25 @@ class Lattice:
         return self.N, self.pos, self.r_eff
     
     
+    def Random_size(self,var=[3,3,0]):
+	
+        """
+        A function to create random sized particles.
+                    
+        Return:
+            N--> total number of particles type(integer)
+            pos--> position of each particle in the lattice type(numpy array)
+            r_eff--> dimensions of each particle type(numpy array (1x3))
+        """
+		if self.type==None:
+			print('Please define the lattice first')
+			return
+		else:	
+			self.r_eff=[[a,b,c] for a in np.random.normal(self.rx,var[0],self.N),for b in np.random.normal(self.ry,var[1],self.N)
+							for c in np.random.normal(self.rz,var[2],self.N)]
+        
+        return self.N, self.pos, self.r_eff
+    
     
     def Random(self,N=10, x_span=100E-9, y_span=100E-9,z_span=40E-9, max_radius = 10E-9, min_radius = 2E-9):
         """
