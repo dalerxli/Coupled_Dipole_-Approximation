@@ -141,19 +141,6 @@ class Lattice:
                      [(1-3*cos_ang)*a,7*sin_ang*a,0],
                      [0,a*8*sin_ang,0],[1*a,a*8*sin_ang,0],[2*a,a*8*sin_ang,0],[3*a,a*8*sin_ang,0]]).reshape(22,3)
 
-        # Define lattice vectors    
-        a1=np.asarray([7*a,0,0])
-        a2=np.asarray([7*a*cos_ang,7*a*sin_ang,0])
-        
-        # Generate Lattice
-        New=[]
-        for i in range(0,Nx):
-            for j in range(0,Ny):
-                New.append(np.add(UC,(a1*i+a2*j)))
-                
-    
-        New=np.asarray(New).reshape(-1,3) 
-        
 
     
         # Define lattice vectors    
@@ -176,19 +163,84 @@ class Lattice:
         d=np.triu(dist.squareform(d))
         for i in range(d.shape[0]):
             for j in d[i]:
-                if j<a/7 and j>0:
+                if j<a/8 and j>0:
                     ind.append(i)
 
         
-        New=np.delete(New,ind,0)
-    
-        self.pos=np.asarray(New).reshape(-1,3)
-        print(self.pos.shape[0])
+        
         New=np.delete(New,ind,0)         
         self.pos=np.asarray(New).reshape(-1,3)
         self.N=self.pos.shape[0]
         self.r_eff=np.asarray([self.rx,self.ry,self.rz]*self.N).reshape(-1,3)
         return self.N, self.pos, self.r_eff
+    
+    
+    def Betta_Graphyne_ext(self):
+        """
+        A function to create Betta-Graphyne lattice with the nx,ny unit cells, 
+        lattice constant of step and particle dimension of rx,ry and rz.
+                    
+        Return:
+            N--> total number of particles type(integer)
+            pos--> position of each particle in the lattice type(numpy array)
+            r_eff--> dimensions of each particle type(numpy array (1x3))
+        """    
+        self.type='Betta_Graphyne'
+
+        a=self.step
+        Nx=self.nx
+        Ny=self.ny
+        #Generate a unit cell
+        sin_ang=np.sin(np.radians(60))
+        cos_ang=np.cos(np.radians(60))
+        UC=np.array([[0,0,0],[a,0,0],[2*a,0,0],[3*a,0,0],[4*a,0,0],[5*a,0,0],
+                     [-cos_ang*a,sin_ang*a,0],[-1.5*a,sin_ang*a,0],
+                     [-2.5*a,sin_ang*a,0],[-3.5*a,sin_ang*a,0],
+                     [-4.5*a,sin_ang*a,0],[-5.5*a,sin_ang*a,0],
+                     [-6.0*a,0,0],[-5.5*a,-sin_ang*a,0],
+                     [-5.0*a,-2*sin_ang*a,0],[-4.5*a,-3*sin_ang*a,0],
+                     [-4.0*a,-4*sin_ang*a,0],[-3.5*a,-5*sin_ang*a,0],
+                     [-2.5*a,-5*sin_ang*a,0],[-2.0*a,-4*sin_ang*a,0],
+                     [-1.5*a,-3*sin_ang*a,0],[-1.0*a,-2*sin_ang*a,0],
+                     [-cos_ang*a,-sin_ang*a,0],[5.5*a,sin_ang*a,0],
+                     [5*a,2*sin_ang*a,0],[4.5*a,3*sin_ang*a,0],
+                     [4*a,4*sin_ang*a,0],[3.5*a,5*sin_ang*a,0],
+                     [3*a,6*sin_ang*a,0],[2*a,6*sin_ang*a,0],
+                     [1.5*a,5*sin_ang*a,0],[a,4*sin_ang*a,0],
+                     [0.5*a,3*sin_ang*a,0],[0,2*sin_ang*a,0]]).reshape(34,3)
+
+    
+        # Define lattice vectors    
+        a1=np.asarray([11*a,0,0])
+        a2=np.asarray([11*a*cos_ang,11*a*sin_ang,0])
+        
+        # Generate Lattice
+        New=[]
+        for i in range(0,Nx):
+            for j in range(0,Ny):
+                New.append(np.add(UC,(a1*i+a2*j)))
+        
+        
+        New=np.asarray(New).reshape(-1,3) 
+        New=np.unique(New, axis=0)
+
+        # Filter repeating values
+        ind=[]
+        d=dist.pdist(New)
+        d=np.triu(dist.squareform(d))
+        
+        for i in range(d.shape[0]):
+            for j in d[i]:
+                if j<a/8 and j>0:
+                    ind.append(i)
+
+        
+        New=np.delete(New,ind,0)         
+        self.pos=np.asarray(New).reshape(-1,3)
+        self.N=self.pos.shape[0]
+        self.r_eff=np.asarray([self.rx,self.ry,self.rz]*self.N).reshape(-1,3)
+        return self.N, self.pos, self.r_eff
+
     
     
 
@@ -256,7 +308,7 @@ class Lattice:
         return self.N, self.pos, self.r_eff
     
     
-    def Random_size(self,var=[3,3,0]):
+    def Random_size(self,var=[3,3,0.000001]):
 	
         """
         A function to create random sized particles.
@@ -266,12 +318,11 @@ class Lattice:
             pos--> position of each particle in the lattice type(numpy array)
             r_eff--> dimensions of each particle type(numpy array (1x3))
         """
-		if self.type==None:
-			print('Please define the lattice first')
-			return
-		else:	
-			self.r_eff=[[a,b,c] for a in np.random.normal(self.rx,var[0],self.N),for b in np.random.normal(self.ry,var[1],self.N)
-							for c in np.random.normal(self.rz,var[2],self.N)]
+        if self.type==None:
+            print('Please define the lattice first')
+            return
+        else:
+            self.r_eff=[[a,b,c] for a,b,c in zip(np.random.normal(self.rx,var[0],self.N),np.random.normal(self.ry,var[1],self.N),np.random.normal(self.rz,var[2],self.N))]
         
         return self.N, self.pos, self.r_eff
     
