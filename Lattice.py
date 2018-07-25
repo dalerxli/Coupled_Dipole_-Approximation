@@ -111,8 +111,64 @@ class Lattice:
             self.r_eff[k]=np.asarray([self.rx,self.ry,self.rz])
         return self.N, self.pos, self.r_eff
     
+	
+    def Graphyne_half(self):
+       """
+        A function to create a square lattice with the nx,ny unit cells, 
+        lattice constant of step and particle dimension of rx,ry and rz.
+                    
+        Return:
+            N--> total number of particles type(integer)
+            pos--> position of each particle in the lattice type(numpy array)
+            r_eff--> dimensions of each particle type(numpy array (1x3))
+        """
+        
+       self.type=='Graphyne_half'
+       a=self.step
+       Nx=self.nx
+       Ny=self.ny
+       
+       # Unit cell definition in normalized units
+       vec=[[0,1,0],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0.866,6.5,0],
+            [2*0.866,6,0],[3*0.866,5.5,0],[4*0.866,5,0],[5*0.866,4.5,0],
+            [6*0.866,4,0],[7*0.866,4.5,0],[8*0.866,5,0],[9*0.866,5.5,0],
+            [10*0.866,6,0],[11*0.866,6.5,0],[12*0.866,6,0],[12*0.866,5,0],
+            [12*0.866,4,0],[12*0.866,4,0],[12*0.866,3,0],[12*0.866,2,0],
+            [12*0.866,1,0],[11*0.866,0.5,0],[10*0.866,1,0],[9*0.866,1.5,0],
+            [8*0.866,2,0],[7*0.866,2.5,0],[6*0.866,3,0],[5*0.866,2.5,0],
+            [4*0.866,2,0],[3*0.866,1.5,0],[2*0.866,1,0],[0.866,0.5,0]]
+
+       vec=np.asarray(vec).reshape(-1,3)*a
+       # Lattice basis vectors
+       a1=np.asarray([12*a*0.866,0,0])
+       a2=np.asarray([0,12*a*0.866*0.6736,0])
+       
+       New=[]                                                                   # container for new lattice points
+
+       # Append new coordinates for unit cells in Nx and Ny span
+       for i in range(Nx):
+           for j in range(Ny):
+               New.append(np.add(vec,(a1*i+a2*j)))
+       New=np.asarray(New).reshape(-1,3) 
+       New=np.unique(New, axis=0)
+        
+       # Filter repeating values
+       ind=[]
+       d=dist.pdist(New)
+       d=np.triu(dist.squareform(d))
+       for i in range(d.shape[0]):
+          for j in d[i]:
+               if j<a/2 and j>0:
+                   ind.append(i) 
+       New=np.delete(New,ind,0)
+       
+       # Update position, count and effective radius vector        
+       self.pos=np.asarray(New).reshape(-1,3)
+       self.N=self.pos.shape[0]
+       self.r_eff=np.asarray([self.rx,self.ry,self.rz]*self.N).reshape(-1,3)
+       return self.N, self.pos, self.r_eff    
     
-    
+	
     def Betta_Graphyne(self):
         """
         A function to create Betta-Graphyne lattice with the nx,ny unit cells, 
