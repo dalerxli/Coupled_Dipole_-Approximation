@@ -24,8 +24,8 @@ for per in period:
     Qp=[]
     k=[]
     energy=[]
-    AOI=[55,0,75,15,10,20,60,25,50,40,70,5,30,45,65,35]
-    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_ext_90/S')
+    AOI=[40,10,20,70,25,75,45,50,60,30,5,65,15,55,35,0]
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_ext_0_80/S')
     files=os.listdir()
     for file in files:
         print(file)
@@ -36,7 +36,7 @@ for per in period:
         f.close()
     
     
-    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_ext_90/P')
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_ext_0_80/P')
     files=os.listdir()
     for file in files:
         print(file)

@@ -8,13 +8,13 @@ Created on Tue Jun 26 09:03:19 2018
 import os 
 
 with open('args.txt','w') as f:
-    for phi in [90]:
+    for phi in [0]:
         for aoi in range(0,80,5):
             wvl_min=400e-9
             wvl_max=1100e-9
             wvl_step=3e-9
             tol=10e-6
-            rx=30e-9        
+            rx=80e-9        
             ry=rx
             rz=0.8*rx
             AOI=aoi
