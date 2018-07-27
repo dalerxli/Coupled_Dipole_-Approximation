@@ -36,8 +36,8 @@ for per in period:
     k=[]
     energy=[]
     #AOI=[50,5,40,60,25,35,10,65,15,70,0,75,20,55,45,30]
-    AOI=[50,65,70,40,55,25,0,75,30,10,60,5,45,20,35,15]
-    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_ext_90_80/S')
+    AOI=[45,60,35,15,20,0,40,50,75,10,55,5,30,65,25,70]
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Graphyne_half/P')
     files=os.listdir()
     for file in files:
         print(file)

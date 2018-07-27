@@ -13,7 +13,7 @@ import numpy as np
 
 Data=[]
 R=[95,85,70,35,65,40,90,30,100,60,80,75,50,55,45]
-d=os.chdir('Results/BG_ext_90_80/S')
+d=os.chdir('Results/Graphyne_half/P')
 files=os.listdir(d)
 for file in files:
     print(file)
