@@ -24,8 +24,8 @@ for per in period:
     Qp=[]
     k=[]
     energy=[]
-    AOI=[45,60,35,15,20,0,40,50,75,10,55,5,30,65,25,70]
-    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Graphyne_half/S')
+    AOI=[20,35,15,45,50,65,5,60,40,30,55,25,0,70,10,75]
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_ext_60/S')
     files=os.listdir()
     for file in files:
         print(file)
@@ -36,7 +36,7 @@ for per in period:
         f.close()
     
     
-    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Graphyne_half/P')
+    os.chdir('/home/renderer/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG_ext_60/P')
     files=os.listdir()
     for file in files:
         print(file)
@@ -53,7 +53,7 @@ for per in period:
     Q=[(np.asarray(Qs[i])+np.asarray(Qp[i]))/2 for i in range(len(Qs))]
     
     fig=plt.figure()
-    cp = plt.contourf(k, energy, Q,500,vmin=0,vmax=1.5,cmap='nipy_spectral')
+    cp = plt.contourf(k, energy, Q,500,vmin=0,vmax=2,cmap='nipy_spectral')
     
 
 
@@ -61,7 +61,7 @@ for per in period:
     plt.ylabel('Energy (eV)',size=15)
     plt.suptitle('Extinction efficiency dispersion, period={}'.format(str(per)+'nm'), fontsize=15)
     cax = fig.add_axes([0.91, 0.15, 0.03, 0.7])
-    cNorm = mpl.colors.Normalize(vmin=0,vmax=1.5)
+    cNorm = mpl.colors.Normalize(vmin=0,vmax=2)
     cb1 = mpl.colorbar.ColorbarBase(cax, norm=cNorm,cmap='nipy_spectral')
     axes = plt.gca()
     plt.show()

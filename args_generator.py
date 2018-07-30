@@ -26,7 +26,7 @@ with open('args.txt','w') as f:
             space=rx*3
             Lat='Betta_Graphyne_ext'
             sd='home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Graphyne_half/S'
-            pol='p' 
+            pol='s' 
  
             f.write('python3 CDA.py {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}\n'.format(wvl_min,wvl_max,wvl_step,tol,rx,ry,rz,aoi,phi,mat,Nm,nx,ny,space,Lat,sd,pol))
 
