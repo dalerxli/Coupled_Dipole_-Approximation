@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Jun 23 17:11:25 2018
-
 @author: slimc
 """
 import matplotlib
@@ -146,14 +145,26 @@ if __name__=='__main__':
 
         print("Elapsed Time @ this wavelenth %3.2f sec" % (end_at_this_wavelength - start_at_this_wavelength))
         
-        def efficiency_calc(cross_section, r_eff,AOI,phi):
-            r=args.a*np.cos(AOI)+args.c*np.sin(AOI)
+        def efficiency_calc_p(cross_section,AOI):
+            r1=args.a
+            r2=args.c
+            r=(r1*r2)/np.sqrt(np.sin(AOI)*np.sin(AOI)*r2**2+np.cos(AOI)*np.cos(AOI)*r1**2)
             return cross_section /(np.pi * r*args.b)
-
-    q_ext = efficiency_calc(c_ext, r_eff,AOI,phi)
-    q_abs = efficiency_calc(c_abs, r_eff,AOI,phi)
-    q_scat = efficiency_calc(c_scat, r_eff,AOI,phi)
-	
+        
+        def efficiency_calc_s(cross_section,AOI):
+            r1=args.a
+            r2=args.b
+            return (cross_section/(np.pi*r1*r2))
+    
+    if args.pol == 's':
+        q_ext = efficiency_calc_s(c_ext,AOI)
+        q_abs = efficiency_calc_s(c_abs,AOI)
+        q_scat = efficiency_calc_s(c_scat,AOI)
+    elif args.pol == 'p':
+        q_ext = efficiency_calc_p(c_ext,AOI)
+        q_abs = efficiency_calc_p(c_abs,AOI)
+        q_scat = efficiency_calc_p(c_scat,AOI)
+    
     end = time.clock()
     print("Elapsed Time %3.2f sec" % (end - start))
     

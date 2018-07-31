@@ -8,7 +8,7 @@ Created on Tue Jun 26 09:03:19 2018
 import os 
 
 with open('args.txt','w') as f:
-    for phi in [60]:
+    for pl in ['p']:
         for aoi in range(0,80,5):
             wvl_min=400e-9
             wvl_max=1100e-9
@@ -18,15 +18,15 @@ with open('args.txt','w') as f:
             ry=rx
             rz=0.8*rx
             AOI=aoi
-            Phi=phi
+            Phi=0
             mat='Au'
             Nm=1.25
-            nx=5
-            ny=5
+            nx=10
+            ny=10
             space=rx*3
             Lat='Betta_Graphyne_ext'
-            sd='home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/Graphyne_half/S'
-            pol='s' 
+            sd='home/Ievgen_stuff/Coupled_Dipole_-Approximation/Results/BG/S'
+            pol=pl 
  
-            f.write('python3 CDA.py {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}\n'.format(wvl_min,wvl_max,wvl_step,tol,rx,ry,rz,aoi,phi,mat,Nm,nx,ny,space,Lat,sd,pol))
+            f.write('python3 CDA.py {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}\n'.format(wvl_min,wvl_max,wvl_step,tol,rx,ry,rz,aoi,Phi,mat,Nm,nx,ny,space,Lat,sd,pol))
 
